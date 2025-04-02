@@ -6,7 +6,7 @@ type Props = { children: ReactNode };
 const AuthenticatedLayout = ({ children }: Props) => {
   return (
     <div className="bg-base100">
-      <header className="h-16 w-full bg-base-300 flex items-center">
+      <header className="h-16 w-full bg-base-300 flex items-center fixed top-0 z-30">
         <Link to="/rooms" className="text-3xl ml-4">
           <img src="/svg/home.svg" className="h-10 w-10" />
         </Link>
