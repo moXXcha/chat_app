@@ -2,7 +2,7 @@ import UserCard from "../components/UserCard";
 
 const CreateMessageRoom = () => {
   return (
-    <div className="w-4/5 mx-auto mt-10">
+    <div className="w-4/5 mx-auto mt-24">
       <h1 className="text-2xl font-bold">create room</h1>
       <div className="border border-base-content rounded-md w-full h-full flex items-center px-2 mt-2">
         <img

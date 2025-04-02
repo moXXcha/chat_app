@@ -10,7 +10,7 @@ const CreateUserForms = () => {
     console.log(icon);
   }, [icon]);
   return (
-    <div className="w-4/5 mx-auto mt-20">
+    <div className="w-4/5 mx-auto mt-24">
       <h1 className="text-2xl mb-10 font-bold">create user</h1>
       <div className="flex flex-col items-center">
         <IconForm setFunc={setIcon} />

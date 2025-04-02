@@ -17,7 +17,7 @@ const AuthenticatedLayout = ({ children }: Props) => {
           <img src="/svg/logout.svg" className="h-10 w-10" />
         </Link>
       </header>
-      <div className="mt-24">{children}</div>
+      {children}
     </div>
   );
 };
