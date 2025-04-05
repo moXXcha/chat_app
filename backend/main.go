@@ -1,13 +1,23 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"fmt"
+
+	"chat_app/model"
+	"chat_app/router"
+	"chat_app/usecase"
+)
 
 func main() {
-	router := gin.Default()
-	router.GET("/api/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
+	db := usecase.InitDB();
+	db.AutoMigrate(
+		&model.Room{},
+		&model.RoomUser{},
+		&model.Talk{},
+		&model.User{},
+		&model.UserProfile{},
+	)
+	fmt.Println("migrated")
+	router := router.Api();
 	router.Run("0.0.0.0:8081")
 }
