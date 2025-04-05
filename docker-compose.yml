@@ -7,9 +7,9 @@ services:
     ports:
       - 5432:5432
     environment:
-      POSTGRES_USER: 'root'
-      POSTGRES_PASSWORD: 'root'
-  
+      POSTGRES_USER: "root"
+      POSTGRES_PASSWORD: "root"
+
   app:
     build:
       context: ./backend/
@@ -22,7 +22,7 @@ services:
       POSTGRES_PORT: 5432
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
-      POSTGRES_NAME: chat_postgres
+      POSTGRES_NAME: postgres
     ports:
       - "8081:8081"
     depends_on:
@@ -33,7 +33,7 @@ services:
       context: ./frontend/
     working_dir: /src/app/frontend
     tty: true
-    ports: 
+    ports:
       - 5173:5173
     volumes:
       - ./frontend:/src/app/frontend
