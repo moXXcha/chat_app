@@ -1,7 +1,7 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import IconForm from "./IconForm";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 const CreateUserForms = () => {
