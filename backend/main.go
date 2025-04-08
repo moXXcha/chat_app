@@ -10,6 +10,7 @@ import (
 
 func main() {
 	db := usecase.InitDB();
+	// db.Callback().Create().Before("gorm:before_create").Register("usecase:set_ulid", usecase.SetULID)
 	db.AutoMigrate(
 		&model.Room{},
 		&model.RoomUser{},
