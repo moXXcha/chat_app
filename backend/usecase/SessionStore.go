@@ -11,7 +11,7 @@ func SessionStore() *sessions.CookieStore {
 		Path:     "/",
 		Domain:   "localhost",
 		MaxAge:   86400,
-		HttpOnly: true,
+		HttpOnly: false,
 		Secure:   true,
 	}
 	return store
