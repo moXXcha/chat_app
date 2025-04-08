@@ -11,5 +11,6 @@ func Api() *gin.Engine {
 	r.POST("/api/signup", controller.Signup)
 	r.POST("/api/login", controller.Login)
 	r.POST("/api/create/profile", controller.CreateProfile)
+	r.POST("/api/logout", controller.Logout)
 	return r
 }

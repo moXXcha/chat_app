@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
+import LogoutButton from "../components/LogoutButton";
 
 type Props = { children: ReactNode };
 
@@ -13,9 +14,7 @@ const AuthenticatedLayout = ({ children }: Props) => {
         <Link to="/room/create" className="text-3xl ml-4">
           <img src="/svg/talk_plus.svg" className="h-10 w-10" />
         </Link>
-        <Link to="/login" className="text-3xl ml-4">
-          <img src="/svg/logout.svg" className="h-10 w-10" />
-        </Link>
+        <LogoutButton />
       </header>
       {children}
     </div>
