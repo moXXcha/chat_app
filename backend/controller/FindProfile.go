@@ -4,6 +4,7 @@ import (
 	"chat_app/model"
 	"chat_app/usecase"
 	"errors"
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -11,7 +12,22 @@ import (
 )
 
 func FindProfile(c *gin.Context) {
-	userId := c.Query("id")
+	// セッションオブジェクトを取得
+    store := usecase.SessionStore()
+	session, err := store.Get(c.Request, "session")
+
+	if err != nil {
+		c.JSON(500, gin.H{"error": err})
+        return
+	}
+
+    // セッションから"user_email"の値を取得
+	userId, ok := session.Values["user_id"].(string)
+	if !ok {
+		// 型アサーションが失敗した場合の処理
+		log.Println("user_id is not a string")
+		return
+	}
 	db := usecase.InitDB()
 
 	var profile model.UserProfile

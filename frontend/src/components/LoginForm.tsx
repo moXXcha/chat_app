@@ -20,12 +20,7 @@ const LoginForm = () => {
       })
       .then(async (response: AxiosResponse<Response>) => {
         if (response.status === 200) {
-          const isCreatedProfile = await isCreateProfile(response.data.userId);
-          if (!isCreatedProfile) {
-            navigate("/user/create");
-          } else {
-            navigate("/rooms");
-          }
+          navigate("/rooms");
         }
       })
       .catch((error) => {

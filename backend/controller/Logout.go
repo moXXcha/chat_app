@@ -19,6 +19,7 @@ func Logout (c *gin.Context) {
 
 	// 🔥 手動でクッキーを削除 (Set-Cookie が2つ送られないように)
 	c.SetCookie("session", "", -1, "/", "", false, true)
+	c.SetCookie("isCreateProfile", "", -1, "/", "", false, true)
 
 	c.JSON(200, gin.H{"message": "logout successful"})
 }

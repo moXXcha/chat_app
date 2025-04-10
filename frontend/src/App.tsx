@@ -11,6 +11,7 @@ import TalkRoom from "./pages/TalkRoom";
 import AuthenticatedLayout from "./layout/AuthenticatedLayout";
 import PrivatePage from "./layout/PrivatePage";
 import AllreadyLoginRoute from "./layout/AllreadyLoginRoute";
+import AllreadyCreateProfile from "./layout/AllreadyCreateProfile";
 
 function App() {
   return (
@@ -51,9 +52,11 @@ function App() {
           path="/user/create"
           element={
             <PrivatePage>
-              <Layout>
-                <CreateUser />
-              </Layout>
+              <AllreadyCreateProfile>
+                <Layout>
+                  <CreateUser />
+                </Layout>
+              </AllreadyCreateProfile>
             </PrivatePage>
           }
         />

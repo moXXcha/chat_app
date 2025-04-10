@@ -4,6 +4,7 @@ import (
 	"chat_app/model"
 	"chat_app/usecase"
 	"errors"
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -52,6 +53,22 @@ func Login(c *gin.Context) {
 			"message": err.Error(),
 		})
 		panic(result.Error)
+	}
+	var profile model.UserProfile
+	var isProfile bool
+	resultProf := db.Where(model.UserProfile{UserId: user.Id}).First(&profile)
+	if !errors.Is(resultProf.Error, gorm.ErrRecordNotFound) {
+		cookie := &http.Cookie{
+			Name:     "isCreateProfile",
+			Value:    fmt.Sprintf("%t", isProfile),
+			Path:     "/",
+			HttpOnly: false,
+			Secure:   true,
+			MaxAge:   864000,
+		}
+	
+		// レスポンスにCookieを追加
+		http.SetCookie(c.Writer, cookie)
 	}
 	session.Values["user_id"] = user.Id
 	session.Values["user_email"] = requestBody.Email
