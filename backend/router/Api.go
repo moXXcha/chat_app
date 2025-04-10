@@ -17,6 +17,7 @@ func Api() *gin.Engine {
 	{
 		r.POST("/api/create/profile", controller.CreateProfile)
 		r.POST("/api/logout", controller.Logout)
+		r.GET("/api/profile", controller.FindProfile)
 	}
 	return r
 }

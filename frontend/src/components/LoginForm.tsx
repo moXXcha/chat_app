@@ -1,7 +1,12 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { isCreateProfile } from "../util/isCreateProfile";
 
+type Response = {
+  status: number;
+  userId: string;
+};
 const LoginForm = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -13,9 +18,14 @@ const LoginForm = () => {
         email: email,
         password: password,
       })
-      .then((response) => {
+      .then(async (response: AxiosResponse<Response>) => {
         if (response.status === 200) {
-          navigate("/user/create");
+          const isCreatedProfile = await isCreateProfile(response.data.userId);
+          if (!isCreatedProfile) {
+            navigate("/user/create");
+          } else {
+            navigate("/rooms");
+          }
         }
       })
       .catch((error) => {
