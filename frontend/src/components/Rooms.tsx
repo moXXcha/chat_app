@@ -22,7 +22,7 @@ const Rooms = () => {
   return (
     <>
       <h1 className="text-2xl font-bold">rooms</h1>
-      {isLoading || !data || roomInfos.length === 0 ? (
+      {isLoading || !data || !roomInfos ? (
         <p>loading...</p>
       ) : (
         <>
