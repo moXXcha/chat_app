@@ -1,5 +1,4 @@
 import CreateRoom from "../components/CreateRoom";
-import UserCard from "../components/UserCard";
 
 const CreateMessageRoom = () => {
   return (
