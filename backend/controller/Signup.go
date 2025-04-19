@@ -16,6 +16,7 @@ type SignupRequestBody struct {
 }
 func Signup(c *gin.Context) {
 	var requestBody SignupRequestBody
+	var  store = usecase.SessionStore()
 	db := usecase.InitDB()
 	if err := c.ShouldBindJSON(&requestBody); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -33,6 +34,17 @@ func Signup(c *gin.Context) {
 		panic(result.Error)
 	}
 
+	session, err := store.Get(c.Request, "session")
+	if err != nil {
+		c.JSON(500, gin.H{
+			"message": err.Error(),
+		})
+		panic(result.Error)
+	}
+	
+	session.Values["user_id"] = user.Id
+	session.Values["user_email"] = requestBody.Email
+	session.Save(c.Request, c.Writer)
 	c.JSON(http.StatusOK, gin.H{
 		"email": requestBody.Email,
 	})

@@ -1,9 +1,31 @@
 "use client";
 
 import { useState } from "react";
+import { Profile } from "../types";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const UserCard = () => {
+type Props = {
+  profile: Profile;
+};
+const UserCard = (props: Props) => {
   const [isModal, setIsModal] = useState<boolean>(false);
+  const navigate = useNavigate();
+
+  const submit = () => {
+    axios
+      .post("/api/create/room", {
+        targetUserId: props.profile.UserId,
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          navigate(`/room/${props.profile.UserId}`);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <>
       <div
@@ -12,13 +34,11 @@ const UserCard = () => {
       >
         <img
           className="min-w-16 h-16 rounded-full object-cover mr-2"
-          src="/img/test.PNG"
+          src={props.profile.AvatarUrl}
         />
         <div>
-          <p>chacha</p>
-          <p className="text-xs">
-            とても腰が痛いし空気乾燥してるしトイレ行きたい誰か助けて
-          </p>
+          <p>{props.profile.Name}</p>
+          <p className="text-xs">{props.profile.StatusMessage}</p>
         </div>
       </div>
       {isModal ? (
@@ -31,13 +51,18 @@ const UserCard = () => {
             <div className="w-full mx-5 mt-5 relative">
               <img
                 className="w-20 h-20 rounded-full object-cover"
-                src="/img/test.PNG"
+                src={props.profile.AvatarUrl}
               />
-              <p className="pl-2 font-bold">chacha</p>
-              <p className="pl-2">眠すぎて草</p>
+              <p className="pl-2 font-bold">{props.profile.Name}</p>
+              <p className="pl-2">{props.profile.StatusMessage}</p>
             </div>
             <div className="flex justify-center absolute bottom-5 left-0 right-0 mx-auto">
-              <button className="btn btn-primary mx-auto">create</button>
+              <button
+                className="btn btn-primary mx-auto"
+                onClick={() => submit()}
+              >
+                create
+              </button>
             </div>
           </div>
         </div>

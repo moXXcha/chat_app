@@ -15,6 +15,7 @@ type UserProfile struct {
 	Name string `gorm:"type:varchar;not null"`
 	StatusMessage string `gorm:"type:text;"`
 	AvatarUrl string `gorm:"type:text;not null"`
+	IsRoomCreated bool `gorm:"not null"`
 	CreatedAt     time.Time
     UpdatedAt     time.Time
     DeletedAt     gorm.DeletedAt `gorm:"index"`

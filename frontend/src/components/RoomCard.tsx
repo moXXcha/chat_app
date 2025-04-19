@@ -1,7 +1,14 @@
-const RoomCard = () => {
+import { RoomInfo } from "../types";
+
+type Props = {
+  roomInfo: RoomInfo;
+};
+const RoomCard = (props: Props) => {
   return (
     <div className="indicator block w-full">
-      <span className="badge badge-secondary indicator-item">99+</span>
+      <span className="badge badge-secondary indicator-item">
+        {props.roomInfo.Room.NotReadedMessageCount}
+      </span>
       <div
         className="w-full h-20 border border-base-content rounded-md flex items-center px-2"
         onClick={() => {
@@ -10,10 +17,10 @@ const RoomCard = () => {
       >
         <img
           className="min-w-16 h-16 rounded-full object-cover mr-2"
-          src="/img/test.PNG"
+          src={props.roomInfo.Profile.AvatarUrl}
         />
         <div>
-          <p>chacha</p>
+          <p>{props.roomInfo.Profile.Name}</p>
           <p className="text-xs">飯食い行こ</p>
         </div>
       </div>

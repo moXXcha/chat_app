@@ -6,12 +6,13 @@ import Layout from "./layout/Layout";
 import Login from "./pages/Login";
 import CreateUser from "./pages/CreateUser";
 import CreateMessageRoom from "./pages/CreateMessageRoom";
-import Rooms from "./pages/Rooms";
 import TalkRoom from "./pages/TalkRoom";
 import AuthenticatedLayout from "./layout/AuthenticatedLayout";
 import PrivatePage from "./layout/PrivatePage";
 import AllreadyLoginRoute from "./layout/AllreadyLoginRoute";
 import AllreadyCreateProfile from "./layout/AllreadyCreateProfile";
+import RoomsPage from "./pages/RoomsPage";
+import { AuthProvider } from "./layout/AuthContext";
 
 function App() {
   return (
@@ -52,11 +53,13 @@ function App() {
           path="/user/create"
           element={
             <PrivatePage>
-              <AllreadyCreateProfile>
-                <Layout>
-                  <CreateUser />
-                </Layout>
-              </AllreadyCreateProfile>
+              <AuthProvider>
+                <AllreadyCreateProfile>
+                  <Layout>
+                    <CreateUser />
+                  </Layout>
+                </AllreadyCreateProfile>
+              </AuthProvider>
             </PrivatePage>
           }
         />
@@ -64,9 +67,11 @@ function App() {
           path="/room/create"
           element={
             <PrivatePage>
-              <AuthenticatedLayout>
-                <CreateMessageRoom />
-              </AuthenticatedLayout>
+              <AuthProvider>
+                <AuthenticatedLayout>
+                  <CreateMessageRoom />
+                </AuthenticatedLayout>
+              </AuthProvider>
             </PrivatePage>
           }
         />
@@ -74,9 +79,11 @@ function App() {
           path="/rooms/"
           element={
             <PrivatePage>
-              <AuthenticatedLayout>
-                <Rooms />
-              </AuthenticatedLayout>
+              <AuthProvider>
+                <AuthenticatedLayout>
+                  <RoomsPage />
+                </AuthenticatedLayout>
+              </AuthProvider>
             </PrivatePage>
           }
         />
@@ -84,9 +91,11 @@ function App() {
           path="/room/:id"
           element={
             <PrivatePage>
-              <AuthenticatedLayout>
-                <TalkRoom />
-              </AuthenticatedLayout>
+              <AuthProvider>
+                <AuthenticatedLayout>
+                  <TalkRoom />
+                </AuthenticatedLayout>
+              </AuthProvider>
             </PrivatePage>
           }
         />

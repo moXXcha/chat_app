@@ -3,6 +3,7 @@ package controller
 import (
 	"chat_app/model"
 	"chat_app/usecase"
+	"fmt"
 	"mime/multipart"
 	"net/http"
 
@@ -44,6 +45,22 @@ func CreateProfile(c *gin.Context) {
 		})
 		panic(result.Error)
 	}
+
+	cookie := &http.Cookie{
+		Name:     "isCreateProfile",
+		Value:    fmt.Sprintf("%t", true),
+		Path:     "/",
+		HttpOnly: false,
+		Secure:   true,
+		MaxAge:   864000,
+	}
+
+	fmt.Println(cookie)
+	
+	// レスポンスにCookieを追加
+	http.SetCookie(c.Writer, cookie)
+	session.Save(c.Request, c.Writer)
+	
 	c.JSON(http.StatusOK, gin.H{
 		"message": "profile create successfuly",
 	})
