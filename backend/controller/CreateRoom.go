@@ -12,6 +12,7 @@ import (
 type CreateRoomRequestBody struct {
 	TargetUserId string
 }
+
 func CreateRoom(c *gin.Context) {
 	var requestBody CreateRoomRequestBody
 
@@ -25,10 +26,10 @@ func CreateRoom(c *gin.Context) {
 
 	if err != nil {
 		c.JSON(500, gin.H{"error": err})
-        return
+		return
 	}
 
-    // セッションから"user_email"の値を取得
+	// セッションから"user_email"の値を取得
 	userId, ok := session.Values["user_id"].(string)
 	if !ok {
 		// 型アサーションが失敗した場合の処理
@@ -37,7 +38,7 @@ func CreateRoom(c *gin.Context) {
 	}
 
 	db := usecase.InitDB()
-	
+
 	room := model.Room{NotReadedMessageCount: 0}
 	resultRoom := db.Create(&room)
 
